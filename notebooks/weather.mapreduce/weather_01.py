@@ -8,7 +8,8 @@ from mrjob.job import MRJob
 import re
 from sys import stderr
 
-cat='TMAX'
+# Temporarily disable this
+# cat='TMAX'
 
 class MRWeather(MRJob):
 
@@ -17,7 +18,10 @@ class MRWeather(MRJob):
             self.increment_counter('MrJob Counters','mapper-all',1)
             elements=line.split(',')
             
-            if elements[0]!='station' and elements[1]==cat:
+            #if elements[0]!='station' and elements[1]==cat:
+            
+            # Take all measurements into account!
+            if elements[0]!='station':
                 #out = (None, elements)
                 #self.increment_counter('MrJob Counters for ' + cat, elements[0],1)
                 out = (elements[0],1)
