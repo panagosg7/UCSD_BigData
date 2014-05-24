@@ -8,22 +8,15 @@ from mrjob.job import MRJob
 import re
 from sys import stderr
 
-# Temporarily disable this
-# cat='TMAX'
-
-class MRWeather(MRJob):
+class MRWeight(MRJob):
 
     def mapper(self, _, line):
         try:
             self.increment_counter('MrJob Counters','mapper-all',1)
             elements=line.split(',')
-            
-            #if elements[0]!='station' and elements[1]==cat:
-            
+   
             # Take all measurements into account!
             if elements[0]!='station':
-                #out = (None, elements)
-                #self.increment_counter('MrJob Counters for ' + cat, elements[0],1)
                 out = (elements[0],1)
             else:
                 out = None
@@ -44,9 +37,8 @@ class MRWeather(MRJob):
 
     def reducer(self, word, counts):
         self.increment_counter('MrJob Counters','reducer',1)
-        yield (word, sum(counts))
-        
-        
+        yield (word, sum(counts))      
+
 
 if __name__ == '__main__':
-    MRWeather.run()
+    MRWeight.run()
