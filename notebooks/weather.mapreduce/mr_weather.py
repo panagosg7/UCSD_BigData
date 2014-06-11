@@ -10,6 +10,14 @@ from sys import stderr
 
 class MRWeather(MRJob):
 
+    def configure_options(self):
+        super(MRWeather,self).configure_options()
+        self.add_passthrough_option('--key', type='string', default='')        
+        self.add_passthrough_option('--secret', type='string', default='')
+        
+    
+    
+    
     def mapper(self, _, line):
         try:
             self.increment_counter('MrJob Counters','mapper-all',1)
